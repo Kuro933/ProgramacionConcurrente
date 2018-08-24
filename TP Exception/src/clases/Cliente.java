@@ -1,6 +1,6 @@
 package clases;
 
-public class Cliente {
+public class Cliente extends Thread{
 
 	private String nombre;
 	private int[] carrito;
@@ -9,7 +9,7 @@ public class Cliente {
 		this.nombre = nomb;
 		this.carrito = arr;
 	}
-	 
+		 
 	public String getNombre() {
 		return nombre;
 	}
@@ -35,4 +35,5 @@ public class Cliente {
 		
 		return s;
 	}
+	
 }
