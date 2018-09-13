@@ -9,8 +9,10 @@ public class Auto extends Vehiculo implements Runnable {
 	private Estacion est;
 	private double KmActual, tanque, reserva;
 
+	/*constructor de varias variables para instanciar cada una de los atributos del auto*/
 	public Auto(String matricula, String model, String marca, double service, String color, double KmActual,
 			Estacion estacion) {
+		
 		super(matricula, model, marca, service);
 		this.color = color;
 		this.KmActual = KmActual;
@@ -21,43 +23,41 @@ public class Auto extends Vehiculo implements Runnable {
 
 	public void run() {
 		int km = 0;
+		/*un while(true) para que se mantenga en constante movimiento el algoritmo y hace andar a los autos cierta cantidad
+		 * de kilometros que en este caso es random */
 		String resp;
 		try {
 			while (true) {
-				if (tanque > 20) {
-//				System.out.println("cuanto andara el auto " + this.getPatente() + ": ");
+				
 					km = Aleatorio.intAleatorio(1, ((int) tanque));
 					this.andar(km);
-//				System.out.print("¿Desea saber cuantos kilometros tiene?: ");
-//				resp = TecladoIn.readLine();
-//				if (resp.equals("si")) {
-					System.out.println(
-							"a recorrido " + (int) this.getKmActual() + " Km el auto: " + this.getPatente() + "\n");
-//				}
-
-					System.out.println("En el tanque le queda " + (int) this.getTanque() + " combustible al auto: "
-							+ this.getPatente() + "\n");
-				}
 			}
 		} catch (Exception e) {
 
 		}
 	}
 
+	
 	public void andar(double cantKm) throws InterruptedException {
 		String resp = "";
-
+/*Metodo andar que pone en marcha y hace recorrer cierta distancia establecida por parametro 
+ * en caso de que disponga de poco combustible el auto lo hace ir a cargar combustible a una estacion*/
 		this.KmActual += cantKm;
 		this.tanque -= cantKm;
-		Thread.sleep((long) (cantKm * 100));
+		Thread.sleep((long) (cantKm*10));
 		if (this.tanque <= this.reserva) {
-//			System.out.println("Esta utilizando la parte de reserva del tanque. ¿Desea cargar combustible?");
-//			resp = TecladoIn.readLine();
+
+			System.out.println(
+					"a recorrido " + (int) this.getKmActual() + " Km el auto: " + this.getPatente() + "\n");
+			
+			System.out.println("En el tanque le queda " + (int) this.getTanque() + " combustible al auto: "
+					+ this.getPatente() + "\n");
+			
 			if (this.tanque < 20) {
 				this.est.cargarCombus(this);
-//			} else {
-//				System.out.println("le queda poco combustible");
 			}
+			
+			
 		}
 		if ((this.getKmService() - cantKm) <= 0) {
 			System.out.println("Es hora de un service");
@@ -104,4 +104,5 @@ public class Auto extends Vehiculo implements Runnable {
 	public Estacion getEst() {
 		return this.est;
 	}
+	/*fin de metodos de observacion y modificacion*/
 }

@@ -3,7 +3,7 @@ package clases;
 public class Vehiculo {
 	
 	private String patente,modelo,marca;
-	private double KmService;
+	private final double KmService;
 	
 	public Vehiculo(String matricula, String model, String marca, double service) {
 		this.patente= matricula;
@@ -40,10 +40,5 @@ public class Vehiculo {
 		return KmService;
 	}
 
-	public void setKmService(double kmService) {
-		KmService = kmService;
-	}
 	
-	
-
 }
